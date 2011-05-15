@@ -11,6 +11,18 @@ set softtabstop=4
 set shiftwidth=4
 set number
 
+set mouse=a
+
+"""" Movement
+" work more logically with wrapped lines
+noremap j gj
+noremap k gk
+
+"""" Searching and Patterns
+set ignorecase							" search is case insensitive
+set smartcase							" search case sensitive if caps on 
+set incsearch							" show best match so far
+set hlsearch							" Highlight matches to the search 
 """" Messages, Info, Status
 set shortmess+=a						" Use [+] [RO] [w] for modified, read-only, modified
 set showcmd								" Display what command is waiting for an operator
@@ -48,8 +60,8 @@ let python_slow_sync=1
 set mouse=a
 vmap <C-c> :<Esc>`>a<CR><Esc>mx`<i<CR><Esc>my'xk$v'y!pbcopy -selection c<CR>u
 
-autocmd VimEnter * NERDTree
-autocmd BufEnter * NERDTreeMirror
+"autocmd VimEnter * NERDTree
+"autocmd BufEnter * NERDTreeMirror
 autocmd VimEnter * wincmd p
 
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
@@ -65,3 +77,9 @@ function! s:CloseIfOnlyNerdTreeLeft()
     endif
   endif
 endfunction
+
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
