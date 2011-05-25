@@ -48,10 +48,10 @@ fi
 
 ## Get git branch
 function current_git_branch {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/' 
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/' 
 }
 
-PS1="${debian_chroot:+($debian_chroot)}${green}\u@\h${NC}:${cyan}\w${purple}\$(current_git_branch)${NC}\$ "
+PS1="${debian_chroot:+($debian_chroot)}${green}\u@\h${NC}:${cyan}\w${purple} \$(current_git_branch)${NC} \$ "
 
 export PS1="\[\e]0;\u@\h: \w\a\]$PS1" # simple title
 
