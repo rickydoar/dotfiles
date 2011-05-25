@@ -104,8 +104,8 @@ fi
 export MP_ENV_TYPE=tim_dev
 export GITHUB_ENV_TYPE=server
 set -o vi
-alias devdb='mysql -u analytics_dev -h mixpanel.com -p'
 
+alias devdb='mysql -u analytics_dev -h 209.114.33.201 -p'
 alias rmpyc='find . -name "*.pyc" | xargs rm -f'
 
 mptype () {
