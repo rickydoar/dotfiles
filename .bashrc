@@ -48,10 +48,10 @@ fi
 
 ## Get git branch
 function current_git_branch {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/' 
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/' 
 }
 
-PS1="${debian_chroot:+($debian_chroot)}${green}\u@\h${NC}:${cyan}\w${purple} \$(current_git_branch)${NC} \$ "
+PS1="${debian_chroot:+($debian_chroot)}${green}\u@\h${NC}:${cyan}\w${purple}\$(current_git_branch)${NC} \$ "
 
 export PS1="\[\e]0;\u@\h: \w\a\]$PS1" # simple title
 
@@ -91,12 +91,14 @@ keychain ~/.ssh/id_rsa
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-export MP_ENV_TYPE=tim_dev
+export MP_ENV_TYPE=tim
+export MP_SUB_ENV_TYPE=dev
 export GITHUB_ENV_TYPE=server
 set -o vi
 
 alias devdb='mysql -u analytics_dev -h 209.114.33.201 -p'
 alias rmpyc='find . -name "*.pyc" | xargs rm -f'
+alias pflakes='pyflakes . | grep -v backend | grep -v utils | grep "undefined name "'
 
 mptype () {
 	if [ -n "$1" ]
