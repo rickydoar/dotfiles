@@ -115,7 +115,7 @@ mxdb () {
 	# "./mxdb" will get you app server
 	# "./mxdb slave1" will get you slave1
 	# ./mxdb HOST USER
-	HOST='mixpanel.com'
+	HOST='10.177.202.17'
 	USER='analytics'
 
 	if [ -n "$1" ]
