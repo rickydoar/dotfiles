@@ -143,3 +143,5 @@ _complete_git() {
 }
 
 complete -F _complete_git checkout
+
+source env/bin/activate
