@@ -91,6 +91,7 @@ keychain ~/.ssh/id_rsa
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+PATH="$HOME/.gem/ruby/1.8/bin:$PATH"
 export MP_ENV_TYPE=tim
 export MP_SUB_ENV_TYPE=dev
 export GITHUB_ENV_TYPE=server
@@ -143,3 +144,22 @@ _complete_git() {
 }
 
 complete -F _complete_git checkout
+
+SSH_ENV="$HOME/.ssh/environment"
+function start_agent {
+    ssh-agent > "$SSH_ENV"
+    chmod 600 "$SSH_ENV"
+    . "$SSH_ENV" > /dev/null
+    ssh-add
+}
+if [ -f "$SSH_ENV" ]; then
+    . "$SSH_ENV" > /dev/null
+fi
+if [ -n "$SSH_AGENT_PID" ]; then
+    ps ${SSH_AGENT_PID} > /dev/null
+    if [ $? -ne 0 ]; then
+        start_agent
+    fi
+else
+    start_agent
+fi
