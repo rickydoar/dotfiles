@@ -57,29 +57,12 @@ set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
  
 let python_highlight_all=1
 let python_slow_sync=1
-set mouse=a
-vmap <C-c> :<Esc>`>a<CR><Esc>mx`<i<CR><Esc>my'xk$v'y!pbcopy -selection c<CR>u
 
-"autocmd VimEnter * NERDTree
-"autocmd BufEnter * NERDTreeMirror
-autocmd VimEnter * wincmd p
+"Set swp files to go to a central location
+set backupdir=$HOME/.vim/swp//,/tmp
+set directory=$HOME/.vim/swp//,/tmp
 
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-
-" Close all open buffers on entering a window if the only
-" buffer that's left is the NERDTree buffer
-function! s:CloseIfOnlyNerdTreeLeft()
-  if exists("t:NERDTreeBufName")
-    if bufwinnr(t:NERDTreeBufName) != -1
-      if winnr("$") == 1
-        q
-      endif
-    endif
-  endif
-endfunction
-
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+map <C-h> :tabp<CR>
+map <C-l> :tabn<CR>
+map :tn :tabnew
 
