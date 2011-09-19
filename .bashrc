@@ -163,3 +163,5 @@ if [ -n "$SSH_AGENT_PID" ]; then
 else
     start_agent
 fi
+
+source env/bin/activate
