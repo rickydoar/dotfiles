@@ -66,3 +66,4 @@ map <C-h> :tabp<CR>
 map <C-l> :tabn<CR>
 map :tn :tabnew
 
+cmap rmw %s/\s\+$//g
