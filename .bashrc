@@ -91,15 +91,15 @@ keychain ~/.ssh/id_rsa
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-PATH="$HOME/.gem/ruby/1.8/bin:$PATH"
 export MP_ENV_TYPE=tim
-export MP_SUB_ENV_TYPE=dev
+export MP_SUB_ENV_TYPE=django
 export GITHUB_ENV_TYPE=server
 set -o vi
 
-alias devdb='mysql -u analytics_dev -h 209.114.33.201 -p'
+alias devdb='mysql -u analytics_dev -h 10.177.203.203 -p'
 alias rmpyc='find . -name "*.pyc" | xargs rm -f'
 alias pflakes='pyflakes . | grep -v backend | grep -v utils | grep "undefined name "'
+alias greppy='grep -rin --include=*.py'
 
 mptype () {
 	if [ -n "$1" ]
@@ -111,12 +111,22 @@ mptype () {
 	fi
 }
 
+dtype () {
+	if [ -n "$1" ]
+	then
+		export DOCTYL_ENV_TYPE=$1
+		echo "Set DOCTYL_ENV_TYPE to $DOCTYL_ENV_TYPE"
+	else
+		echo "DOCTYL_ENV_TYPE is $DOCTYL_ENV_TYPE"
+	fi
+}
+
 mxdb () {
 	# Usage: 
 	# "./mxdb" will get you app server
 	# "./mxdb slave1" will get you slave1
 	# ./mxdb HOST USER
-	HOST='10.177.202.17'
+	HOST='173.193.164.99'
 	USER='analytics'
 
 	if [ -n "$1" ]
@@ -143,8 +153,6 @@ _complete_git() {
     fi
 }
 
-complete -F _complete_git checkout
-
 SSH_ENV="$HOME/.ssh/environment"
 function start_agent {
     ssh-agent > "$SSH_ENV"
@@ -164,4 +172,7 @@ else
     start_agent
 fi
 
+complete -F _complete_git checkout
+
 source env/bin/activate
+stty -ixon -ixoff

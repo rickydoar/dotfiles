@@ -3,6 +3,7 @@
 ##    Some general options    ##
 
 # Turn off start message:
+escape ^Ss
 startup_message off
 
 # Set messages timeout to one second:
