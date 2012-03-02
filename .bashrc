@@ -84,12 +84,15 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+# don't match .pyc files when tab-completing in bash
+export FIGNORE=$FIGNORE:.pyc
+
 keychain ~/.ssh/id_rsa
 . ~/.keychain/$HOSTNAME-sh
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+if [ -d "$HOME/env/bin" ] ; then
+    PATH="$HOME/env/bin:$PATH"
 fi
 export MP_ENV_TYPE=tim
 export MP_SUB_ENV_TYPE=django
@@ -144,6 +147,9 @@ mxdb () {
 	echo "user: $USER"
 	mysql -u $USER -h $HOST -P 3306 -p 
 }
+
+
+# Autocomplete git branches
 _complete_git() {
     if [ -d .git ]; then
         branches=`git branch -a | cut -c 3-`
@@ -152,6 +158,8 @@ _complete_git() {
         COMPREPLY=( $(compgen -W "${branches} ${tags}" -- ${cur}) )
     fi
 }
+complete -F _complete_git checkout
+
 
 SSH_ENV="$HOME/.ssh/environment"
 function start_agent {
@@ -172,7 +180,7 @@ else
     start_agent
 fi
 
-complete -F _complete_git checkout
 
-source env/bin/activate
+# start virtualenv
+source $HOME/env/bin/activate
 stty -ixon -ixoff
