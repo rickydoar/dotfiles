@@ -99,7 +99,7 @@ export MP_SUB_ENV_TYPE=django
 export GITHUB_ENV_TYPE=server
 set -o vi
 
-alias devdb='mysql -u analytics_dev -h 10.177.203.203 -p'
+alias devdb='mysql -u analytics_dev -p'
 alias rmpyc='find . -name "*.pyc" | xargs rm -f'
 alias pflakes='pyflakes . | grep -v backend | grep -v utils | grep "undefined name "'
 alias greppy='grep -rin --include=*.py'
@@ -184,3 +184,5 @@ fi
 # start virtualenv
 source $HOME/env/bin/activate
 stty -ixon -ixoff
+
+export GCC=gcc4.3

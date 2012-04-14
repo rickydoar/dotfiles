@@ -67,4 +67,7 @@ map <C-h> :tabp<CR>
 map <C-l> :tabn<CR>
 map :tn :tabnew
 
-cmap rmw %s/\s\+$//g
+" Remove trailing whitespace
+cmap rmw %s/\s\+$//g 
+" Convert CSS to JS dict formatting
+cmap cj s/\(\s*\)\(\S\)\(.*\):\s*\(.*\);/\1'\2\3': '\4',/g
