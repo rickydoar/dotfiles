@@ -33,6 +33,8 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+export MANPAGER="/bin/sh -c \"col -bx | vim -c 'set ft=man' -\""
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -129,7 +131,7 @@ mxdb () {
 	# "./mxdb" will get you app server
 	# "./mxdb slave1" will get you slave1
 	# ./mxdb HOST USER
-	HOST='173.193.164.99'
+	HOST='10.36.213.4'
 	USER='analytics'
 
 	if [ -n "$1" ]
@@ -185,4 +187,4 @@ fi
 source $HOME/env/bin/activate
 stty -ixon -ixoff
 
-export GCC=gcc4.3
+export GCC=gcc-4.3
