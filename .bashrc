@@ -53,7 +53,7 @@ function current_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/' 
 }
 
-PS1="${debian_chroot:+($debian_chroot)}${green}\u@\h${NC}:${cyan}\w${purple}\$(current_git_branch)${NC} \$ "
+PS1="${debian_chroot:+($debian_chroot)}${red}\u@\h${NC}:${cyan}\w${purple}\$(current_git_branch)${NC} \$ "
 
 export PS1="\[\e]0;\u@\h: \w\a\]$PS1" # simple title
 
@@ -161,6 +161,24 @@ _complete_git() {
     fi
 }
 complete -F _complete_git checkout
+
+_fab()
+{
+    local cur
+    COMPREPLY=()
+    # Variable to hold the current word
+    cur="${COMP_WORDS[COMP_CWORD]}"
+
+    # Build a list of the available tasks using the command 'fab -l'
+    local tags=$(fab -l 2>/dev/null | grep "^    " | awk '{print $1;}')
+
+    # Generate possible matches and store them in the
+    # array variable COMPREPLY
+    COMPREPLY=($(compgen -W "${tags}" $cur))
+}
+
+# Assign the auto-completion function _fab for our command fab.
+complete -F _fab fab
 
 
 SSH_ENV="$HOME/.ssh/environment"
