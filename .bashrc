@@ -33,7 +33,7 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-export MANPAGER="/bin/sh -c \"col -bx | vim -c 'set ft=man' -\""
+# export MANPAGER="/bin/sh -c \"col -bx | vim -c 'set ft=man' -\""
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -53,7 +53,7 @@ function current_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/' 
 }
 
-PS1="${debian_chroot:+($debian_chroot)}${red}\u@\h${NC}:${cyan}\w${purple}\$(current_git_branch)${NC} \$ "
+PS1="${debian_chroot:+($debian_chroot)}${green}\u@\h${NC}:${cyan}\w${purple}\$(current_git_branch)${NC} \$ "
 
 export PS1="\[\e]0;\u@\h: \w\a\]$PS1" # simple title
 
@@ -79,6 +79,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.bash_local ]; then
+    . ~/.bash_local
+fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -96,6 +100,11 @@ keychain ~/.ssh/id_rsa
 if [ -d "$HOME/env/bin" ] ; then
     PATH="$HOME/env/bin:$PATH"
 fi
+
+if [ -d "/usr/local/go" ] ; then
+    PATH="/usr/local/go/bin:$PATH"
+fi
+
 export MP_ENV_TYPE=tim
 export MP_SUB_ENV_TYPE=django
 export GITHUB_ENV_TYPE=server

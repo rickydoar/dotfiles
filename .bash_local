@@ -1,0 +1,14 @@
+#!/bin/bash
+dev() {
+	if [ -n "$1" ]
+	then
+        gnome-terminal \
+            --tab -e "ssh tim@$1 -t screen -RD vim1" \
+            --tab -e "ssh tim@$1 -t screen -RD vim2" \
+            --tab -e "ssh tim@$1 -t screen -RD vim3" \
+            --tab -e "ssh tim@$1 -t screen -RD vim4" \
+            --tab -e "ssh tim@$1 -t screen -RD vim5"
+	else
+		echo "dev host arg required"
+	fi
+}
