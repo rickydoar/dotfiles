@@ -52,6 +52,9 @@ syntax enable								" Turn on syntax highlighting
 
 " we don't want to edit these type of files
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
+
+" sytax highlighting for lesscss
+au BufNewFile,BufRead *.less set filetype=less
  
 " autocmd filetype html setlocal noexpandtab tabstop=2 softtabstop=2 shiftwidth=2
 " autocmd filetype css setlocal noexpandtab tabstop=2 softtabstop=2 shiftwidth=2

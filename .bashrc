@@ -114,6 +114,7 @@ alias devdb='mysql -u analytics_dev -p'
 alias rmpyc='find . -name "*.pyc" | xargs rm -f'
 alias pflakes='pyflakes . | grep -v backend | grep -v utils | grep "undefined name "'
 alias greppy='grep -rin --include=*.py'
+alias ll='ls -lh --ignore=*.pyc'
 
 mptype () {
 	if [ -n "$1" ]
