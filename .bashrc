@@ -114,7 +114,7 @@ alias devdb='mysql -u analytics_dev -p'
 alias rmpyc='find . -name "*.pyc" | xargs rm -f'
 alias pflakes='pyflakes . | grep -v backend | grep -v utils | grep "undefined name "'
 alias greppy='grep -rin --include=*.py'
-alias ll='ls -lh --ignore=*.pyc'
+alias ll='ls -alH -I *.pyc'
 
 mptype () {
 	if [ -n "$1" ]
@@ -216,3 +216,4 @@ source $HOME/env/bin/activate
 stty -ixon -ixoff
 
 export GCC=gcc-4.3
+export GOPATH=$GOPATH:~/dev/go/
